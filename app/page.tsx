@@ -1273,7 +1273,7 @@ export default function AnnualFluShots() {
                   <Shield className="w-6 h-6 text-blue-200 mr-3" />
                   <div className="text-left">
                     <p className="font-semibold">Licensed Professionals</p>
-                    <p className="text-blue-200">CDC Approved Vaccines</p>
+                    <p className="text-blue-200">DCGI-Approved Vaccine</p>
                   </div>
                 </div>
               </div>
