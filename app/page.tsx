@@ -1,6 +1,10 @@
+'use client'
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useState } from 'react';
+import { Menu, X, } from 'lucide-react';
+
 // import {FluShot} from "@app/Public/Images/FluShot"
 import {
   Accordion,
@@ -39,65 +43,103 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function AnnualFluShots() {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Image
-              src="/images/dr-morepen-logo.png"
-              alt="Dr. Morepen Home Logo"
-              width={180}
-              height={60}
-              className="h-12 w-auto"
-            />
-          </div>
-          <nav className="hidden md:flex items-center space-x-6">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center space-x-3">
+          <Image
+            src="/images/dr-morepen-logo.png"
+            alt="Dr. Morepen Home Logo"
+            width={180}
+            height={60}
+            className="h-12 w-auto"
+          />
+        </div>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center space-x-6">
+          {[
+            ['#what-are-flu-shots', 'About Flu Shots'],
+            ['#why-yearly', 'Why Yearly'],
+            ['#who-should-get', 'Who Needs It'],
+            ['#effectiveness', 'Effectiveness'],
+            ['#myths', 'Myths'],
+            ['#faq', 'FAQ'],
+          ].map(([href, label]) => (
             <Link
-              href="#what-are-flu-shots"
+              key={href}
+              href={href}
               className="text-gray-600 hover:text-blue-600 transition-colors"
             >
-              About Flu Shots
+              {label}
             </Link>
-            <Link
-              href="#why-yearly"
-              className="text-gray-600 hover:text-blue-600 transition-colors"
+          ))}
+        </nav>
+
+        {/* Call / WhatsApp Buttons */}
+        <div className="hidden sm:flex items-center space-x-3">
+          <a href="tel:9570009000">
+            <Button
+              variant="outline"
+              className="bg-blue-600 hover:bg-blue-700 text-white hover:text-white"
             >
-              Why Yearly
-            </Link>
+              <Phone className="w-4 h-4 mr-2" />
+              Call Now
+            </Button>
+          </a>
+          <a
+            href="https://wa.me/919570009000"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="bg-green-600 hover:bg-green-700 text-white">
+              <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
+              WhatsApp
+            </Button>
+          </a>
+        </div>
+
+        {/* Hamburger Icon */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-gray-700 focus:outline-none"
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden px-4 pb-4 space-y-3">
+          {[
+            ['#what-are-flu-shots', 'About Flu Shots'],
+            ['#why-yearly', 'Why Yearly'],
+            ['#who-should-get', 'Who Needs It'],
+            ['#effectiveness', 'Effectiveness'],
+            ['#myths', 'Myths'],
+            ['#faq', 'FAQ'],
+          ].map(([href, label]) => (
             <Link
-              href="#who-should-get"
-              className="text-gray-600 hover:text-blue-600 transition-colors"
+              key={href}
+              href={href}
+              className="block text-gray-700 hover:text-blue-600 transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
             >
-              Who Needs It
+              {label}
             </Link>
-            <Link
-              href="#effectiveness"
-              className="text-gray-600 hover:text-blue-600 transition-colors"
-            >
-              Effectiveness
-            </Link>
-            <Link
-              href="#myths"
-              className="text-gray-600 hover:text-blue-600 transition-colors"
-            >
-              Myths
-            </Link>
-            <Link
-              href="#faq"
-              className="text-gray-600 hover:text-blue-600 transition-colors"
-            >
-              FAQ
-            </Link>
-          </nav>
-          <div className="flex items-center space-x-3">
-            <a href="tel:9570009000" className="flex items-center ">
-              <Button
-                variant="outline"
-                className="hidden sm:flex bg-transparent bg-blue-600  hover:bg-blue-700 hover:text-white text-white"
-              >
-                <Phone className="w-4 h-4 mr-2  text-white" />
+          ))}
+
+          {/* Mobile Buttons */}
+          <div className="flex flex-col space-y-2 pt-2">
+            <a href="tel:9570009000">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                <Phone className="w-4 h-4 mr-2" />
                 Call Now
               </Button>
             </a>
@@ -106,14 +148,15 @@ export default function AnnualFluShots() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="bg-green-600 hover:text-white hover:bg-green-700 w-100">
+              <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
                 <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
                 WhatsApp
               </Button>
             </a>
           </div>
         </div>
-      </header>
+      )}
+    </header>
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 via-white to-orange-50 py-20">
@@ -152,7 +195,9 @@ export default function AnnualFluShots() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <div className="flex flex-row sm:flex-row lg:gap-4 sm:gap-2
+                  md:gap-1
+               mb-8">
                 <a href="tel:9570009000">
                   <Button
                     size="lg"
@@ -170,7 +215,7 @@ export default function AnnualFluShots() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className=" text-white bg-green-500 text-lg px-8 py-4 "
+                    className=" bg-green-600 hover:bg-green-700 text-white hover:text-white text-lg px-8 py-4 "
                   >
                     <FontAwesomeIcon
                       icon={faWhatsapp}
@@ -185,9 +230,9 @@ export default function AnnualFluShots() {
               <div className="grid grid-cols-3 gap-6 pt-6 border-t border-gray-200">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-blue-600">
-                    100,000+
+                    10,000+
                   </div>
-                  <div className="text-sm text-gray-600">Flu Shots Given</div>
+                  <div className="text-sm text-gray-600">Happy Customers</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-orange-600">95%</div>
@@ -229,7 +274,7 @@ export default function AnnualFluShots() {
                 </div>
 
                 {/* Additional trust element */}
-                <div className="absolute -top-4 -right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                <div className="absolute -top-4 lg:-right-4  bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                   ✓ 2025-26 Season
                 </div>
               </div>
@@ -1233,7 +1278,8 @@ export default function AnnualFluShots() {
               your flu shot at home, today
             </p>
             <div id="flu-shot-section" className="flex flex-col items-center ">
-              <div className="flex gap-6 mb-12 ">
+        <div className="flex flex-col lg:flex-row gap-6 mb-12">
+
                 <div>
                   <a href="https://wa.me/919570009000">
                     <Button
@@ -1261,7 +1307,7 @@ export default function AnnualFluShots() {
                   </a>
                 </div>
               </div>
-              <div className="flex  gap-12 text-white">
+              <div className="flex flex-col lg:flex-row  gap-12 text-white">
                 <div className="flex items-center justify-center">
                   <Phone className="w-6 h-6 text-blue-200 mr-3" />
                   <div className="text-left">
@@ -1285,7 +1331,7 @@ export default function AnnualFluShots() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="md:flex justify-center gap-8">
             <div>
               <Image
                 src="/images/dr-morepen-logo.png"
@@ -1294,9 +1340,10 @@ export default function AnnualFluShots() {
                 height={60}
                 className="h-12 w-auto mb-4 brightness-0 invert"
               />
-              <p className="text-gray-400 text-sm mb-4">
+      <p className="text-gray-400 text-sm mb-4 lg:w-64">
+
                 Providing professional flu vaccination services in the comfort
-                of your home since 2020.
+                of your home 
               </p>
 
               <div className="flex space-x-4">
@@ -1326,7 +1373,7 @@ export default function AnnualFluShots() {
                 </a>
               </div>
             </div>
-            <div>
+            {/* <div>
               <h4 className="font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li>
@@ -1385,9 +1432,9 @@ export default function AnnualFluShots() {
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <div>
-              <h4 className="font-semibold mb-4">Contact Info</h4>
+              <h4 className="font-semibold mb-4 mt-7">Contact Info</h4>
               <div className="space-y-2 text-sm text-gray-400">
                 <p className="flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
@@ -1402,16 +1449,16 @@ export default function AnnualFluShots() {
                 <p className="flex items-center">
                   <Clock className="w-4 h-4 mr-2" />7 Day Availability
                 </p>
-                <p className="flex items-center">
+                {/* <p className="flex items-center">
                   <Home className="w-4 h-4 mr-2" />
                   Serving Nationwide
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
             <p>
-              &copy; 2024 Dr. Morepen Home. All rights reserved. | Privacy
+              &copy; 2025 Dr. Morepen Home. All Rights Reserved. | Privacy
               Policy | Terms of Service | Vaccine Safety Policy
             </p>
           </div>
