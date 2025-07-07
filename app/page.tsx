@@ -242,7 +242,7 @@ export default function AnnualFluShots() {
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-green-600">
-                    7 Day Available
+                    7 Days
                   </div>
                   <div className="text-sm text-gray-600">Support Available</div>
                 </div>
