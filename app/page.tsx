@@ -43,7 +43,23 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function AnnualFluShots() {
+  const handleCallClick = () => {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-17014939967/JzZ2CL-5oboaEL_CrbE_',
+      value: 1.0,
+      currency: 'INR',
+    });
+    console.log(' Conversion tracked');
+  } else {
+    console.warn(' gtag is not defined yet');
+  }
+
+ 
+};
+  
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -98,7 +114,7 @@ export default function AnnualFluShots() {
           >
             <Button className="bg-green-600 hover:bg-green-700 text-white">
               <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
-              Book now
+              WhatsApp
             </Button>
           </a>
         </div>
@@ -138,9 +154,9 @@ export default function AnnualFluShots() {
           {/* Mobile Buttons */}
           <div className="flex flex-col space-y-2 pt-2">
             <a href="tel:9570009000">
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white " >`
                 <Phone className="w-4 h-4 mr-2" />
-                Call Now
+                Call Now 
               </Button>
             </a>
             <a
@@ -150,7 +166,7 @@ export default function AnnualFluShots() {
             >
               <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
                 <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
-                Book now
+                WhatsApp
               </Button>
             </a>
           </div>
@@ -202,7 +218,7 @@ export default function AnnualFluShots() {
                   <Button
                     size="lg"
                     className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-4"
-                  >
+                 onClick={handleCallClick} >
                     <Phone className="w-4 h-4 mr-2  text-white" />
                     Call Now
                   </Button>
@@ -216,12 +232,13 @@ export default function AnnualFluShots() {
                     size="lg"
                     variant="outline"
                     className=" bg-green-600 hover:bg-green-700 text-white hover:text-white text-lg px-8 py-4 "
+                    onClick={handleCallClick}
                   >
                     <FontAwesomeIcon
                       icon={faWhatsapp}
                       className="w-5 h-5 mr-2"
                     />
-                    Book now
+                    WhatsApp
                   </Button>
                 </a>
               </div>
@@ -1290,7 +1307,7 @@ export default function AnnualFluShots() {
                         icon={faWhatsapp}
                         className="w-6 h-6 mr-3"
                       />
-                       Book now
+                       WhatsApp
                     </Button>
                   </a>
                 </div>
